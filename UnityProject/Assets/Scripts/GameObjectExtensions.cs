@@ -15,12 +15,12 @@ public static class GameObjectUtility
 
             if (go.tag == tag) return go;
         }
-
+        
         return null;
     }
 
     public static GameObject FindObjectByName(string name)
     {
-        return Resources.FindObjectsOfTypeAll(typeof(GameObject)).Cast<GameObject>().FirstOrDefault(go => go.name == name);
+        return Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(go => go.name == name);
     }
 }

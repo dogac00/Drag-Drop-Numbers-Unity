@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class Number : Draggable
 {
-    private bool _isInTrigger;
     private string _colliderTag;
 
     private static GameObject _successPanel;
     private static int _total;
 
-    protected void Initialize(string colTag)
+    protected override void Start()
     {
-        _colliderTag = colTag;
+        _colliderTag = string.Empty;
         _successPanel = GameObjectUtility.FindObjectByName("Panel");
 
         base.Start();
@@ -20,17 +19,19 @@ public class Number : Draggable
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.tag == _colliderTag)
+        if (this.tag == collider.tag)
         {
-            _isInTrigger = true;
+            _colliderTag = collider.tag;
+            _total++;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collider)
     {
-        if (collider.tag == _colliderTag)
+        if (this.tag == collider.tag)
         {
-            _isInTrigger = false;
+            _colliderTag = string.Empty;
+            _total--;
         }
     }
 
@@ -38,16 +39,18 @@ public class Number : Draggable
     {
         base.OnMouseUp();
 
-        if (!_isInTrigger)
+        if (this.tag != _colliderTag)
         {
-            _total--;
             base.GoBack();
         }
         else
         {
-            _total++;
+            if (_total == 3)
+            {
+                _successPanel.SetActive(true);
 
-            if (_total == 3) _successPanel.SetActive(true);
+                _total = 100;
+            }
         }
     }
 }

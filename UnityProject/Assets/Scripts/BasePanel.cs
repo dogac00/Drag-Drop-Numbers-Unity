@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CongratsPanel : MonoBehaviour
+public class BasePanel : MonoBehaviour
 {
     void OnEnable()
     {

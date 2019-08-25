@@ -9,7 +9,7 @@ public class Draggable : MonoBehaviour
 
     private Vector3 _firstPosition;
 
-    protected void Start()
+    protected virtual void Start()
     {
         _mainCamera = Camera.main;
         _firstPosition = this.transform.position;
